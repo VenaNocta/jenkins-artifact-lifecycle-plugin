@@ -13,42 +13,46 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jenkinsci.plugins.artifact.lifecycle.config;
+package org.jenkinsci.plugins.artifact.lifecycle.ui;
+
+import org.jenkinsci.plugins.artifact.lifecycle.config.Messages;
 
 import edu.umd.cs.findbugs.annotations.NonNull;
 import hudson.Extension;
 
-@Extension(ordinal = Long.MAX_VALUE)
-public class ArtifactLifecycleDashboardPage extends ArtifactLifecycleConfigPage {
+@Extension
+public class ArtifactLifecycleSettingsPage extends ArtifactLifecycleConfigPage {
+
+	public static final String PAGE_KEY = "settings";
 
 	@Override
 	public String getUrlName() {
-		return ACTION_URL;
+		return PAGE_KEY;
 	}
 
 	@Override
 	public String getDisplayName() {
-		return Messages.ArtifactLifecycleDashboardPage_DisplayName();
+		return Messages.ArtifactLifecycleSettingsPage_DisplayName();
 	}
 
-	@Extension(ordinal = Long.MAX_VALUE)
-	public static class DashboardLink extends ArtifactLifecycleConfigLink {
+	@Extension(ordinal = 10_000L)
+	public static class SettingsLink extends ArtifactLifecycleConfigLink {
+
 		@Override
 		@NonNull
 		public String getUrl() {
-			return ACTION_URL;
+			return ACTION_URL + "/" + PAGE_KEY;
 		}
 
 		@Override
 		@NonNull
 		public String getIcon() {
-			return "symbol-server icon-md";
+			return "icon-gear2 icon-md";
 		}
 
 		@Override
 		public String getDisplayName() {
-			return Messages.ArtifactLifecycleDashboardPage_DisplayName();
+			return Messages.ArtifactLifecycleSettingsPage_DisplayName();
 		}
 	}
-
 }

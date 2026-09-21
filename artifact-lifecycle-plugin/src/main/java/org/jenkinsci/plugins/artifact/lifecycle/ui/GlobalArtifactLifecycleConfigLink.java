@@ -13,12 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jenkinsci.plugins.artifact.lifecycle.config;
+package org.jenkinsci.plugins.artifact.lifecycle.ui;
 
-import static org.jenkinsci.plugins.artifact.lifecycle.config.ArtifactLifecycleConfigPage.ACTION_URL;
+import static org.jenkinsci.plugins.artifact.lifecycle.ui.ArtifactLifecycleConfigPage.ACTION_URL;
 
 import java.util.function.Predicate;
 import org.jenkinsci.Symbol;
+import org.jenkinsci.plugins.artifact.lifecycle.config.Messages;
 import org.kohsuke.stapler.StaplerProxy;
 
 import hudson.Extension;

@@ -13,9 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jenkinsci.plugins.artifact.lifecycle.config;
+package org.jenkinsci.plugins.artifact.lifecycle.ui;
 
 import java.util.logging.Logger;
+
+import org.jenkinsci.plugins.artifact.lifecycle.config.GlobalRepositoryIndex;
+import org.jenkinsci.plugins.artifact.lifecycle.config.Messages;
+
 import edu.umd.cs.findbugs.annotations.NonNull;
 import hudson.Extension;
 import hudson.model.Descriptor;
