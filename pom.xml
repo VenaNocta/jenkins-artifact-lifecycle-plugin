@@ -47,11 +47,6 @@
 		</license>
 	</licenses>
 
-	<organization>
-		<name>RunedUniverse</name>
-		<url>https://www.runeduniverse.net</url>
-	</organization>
-
 	<developers>
 		<developer>
 			<id>venanocta</id>
@@ -119,7 +114,7 @@
 		<openjdk-min-version>${maven.compiler.release}</openjdk-min-version>
 		<plugin-revelc-formatter-version>2.23.0</plugin-revelc-formatter-version>
 		<plugin-maven-toolchains-version>3.1.0</plugin-maven-toolchains-version>
-		<plugin-mycila-license-version>4.2.rc1</plugin-mycila-license-version>
+		<plugin-mycila-license-version>5.1.2</plugin-mycila-license-version>
 		<maven-jenkins-workflow-version>1.0.0</maven-jenkins-workflow-version>
 		<!-- ARTIFACT VERSIONS - TEST -->
 		<!--
