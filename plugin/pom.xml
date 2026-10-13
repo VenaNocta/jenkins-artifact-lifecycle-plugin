@@ -21,14 +21,13 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
-		<groupId>org.jenkins-ci.plugins.artifact-signing</groupId>
-		<artifactId>artifact-signing-parent</artifactId>
-		<version>1.0.0</version>
+		<groupId>org.jenkins-ci.plugins</groupId>
+		<artifactId>artifact-lifecycle-parent</artifactId>
+		<version>${revision}-v${changelist}</version>
 	</parent>
 
 	<groupId>org.jenkins-ci.plugins</groupId>
 	<artifactId>artifact-lifecycle</artifactId>
-	<version>1.0.0</version>
 	<packaging>hpi</packaging>
 
 	<name>Jenkins Artifact Lifecycle</name>
@@ -39,58 +38,12 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<root-dir>..</root-dir>
 		<hpi.bundledArtifacts></hpi.bundledArtifacts>
-		<!-- VERSIONS -->
-		<sources-version>1.0.0</sources-version>
-		<bundle-version>1.0.0</bundle-version>
 	</properties>
-
-	<licenses>
-		<license>
-			<name>Apache License, Version 2</name>
-			<url>https://www.apache.org/licenses/LICENSE-2.0</url>
-		</license>
-	</licenses>
-
-	<organization>
-		<name>RunedUniverse</name>
-		<url>https://www.runeduniverse.net</url>
-	</organization>
-
-	<developers>
-		<developer>
-			<id>venanocta</id>
-			<name>VenaNocta</name>
-			<email>venanocta@gmail.com</email>
-			<organization>RunedUniverse</organization>
-			<organizationUrl>https://www.runeduniverse.net</organizationUrl>
-			<timezone>Europe/Vienna</timezone>
-			<roles>
-				<role>Maintainer</role>
-				<role>Developer</role>
-			</roles>
-		</developer>
-	</developers>
-
-	<scm>
-		<url>
-			https://github.com/RunedUniverse/jenkins-artifact-signing-plugin</url>
-		<connection>
-			scm:git:https://github.com/RunedUniverse/jenkins-artifact-signing-plugin.git</connection>
-		<developerConnection>
-			scm:git:git@github.com:RunedUniverse/jenkins-artifact-signing-plugin.git</developerConnection>
-	</scm>
-	<issueManagement>
-		<system>GitHub Issues</system>
-		<url>
-			https://github.com/RunedUniverse/jenkins-artifact-signing-plugin/issues
-		</url>
-	</issueManagement>
 
 	<dependencies>
 		<dependency>
 			<groupId>org.jenkins-ci.plugins</groupId>
 			<artifactId>artifact-bundle</artifactId>
-			<version>${bundle-version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.jenkins-ci.plugins</groupId>
@@ -150,18 +103,6 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
-
-	<dependencyManagement>
-		<dependencies>
-			<dependency>
-				<groupId>org.jenkins-ci.plugins.artifact-signing</groupId>
-				<artifactId>artifact-signing-sbom</artifactId>
-				<version>${sources-version}</version>
-				<type>pom</type>
-				<scope>import</scope>
-			</dependency>
-		</dependencies>
-	</dependencyManagement>
 
 	<build>
 		<resources>
