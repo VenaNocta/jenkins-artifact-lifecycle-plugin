@@ -29,6 +29,8 @@ import java.util.stream.Collectors;
 import java.util.UUID;
 import org.jenkinsci.Symbol;
 import org.jenkinsci.plugins.artifact.lifecycle.ui.GlobalArtifactLifecycleConfigLink.ArtifactLifecycleCategory;
+import org.jenkinsci.plugins.identifieddata.api.IdentifiedByUUID;
+import org.jenkinsci.plugins.identifieddata.api.IdentifierUtils;
 import org.kohsuke.accmod.Restricted;
 import org.kohsuke.accmod.restrictions.NoExternalUse;
 import org.kohsuke.stapler.DataBoundSetter;

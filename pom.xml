@@ -102,6 +102,7 @@
 		<!-- VERSIONS -->
 		<revision>1.0</revision>
 		<changelist>0</changelist>
+		<identified-data-api-version>1.0-v0</identified-data-api-version>
 		<bundle-version>1.0-v0</bundle-version>
 		<!-- ARTIFACT VERSIONS - BOMs -->
 		<jenkins-tools-bom-version>2.555.x</jenkins-tools-bom-version>
@@ -150,6 +151,11 @@
 			</dependency>
 
 			<!-- PLUGINS -->
+			<dependency>
+				<groupId>org.jenkins-ci.plugins</groupId>
+				<artifactId>identified-data-api</artifactId>
+				<version>${identified-data-api-version}</version>
+			</dependency>
 			<dependency>
 				<groupId>org.jenkins-ci.plugins</groupId>
 				<artifactId>artifact-bundle</artifactId>

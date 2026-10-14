@@ -26,6 +26,11 @@ import java.util.function.Consumer;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
 
+import org.jenkinsci.plugins.identifieddata.api.IdentifiedByUUID;
+import org.jenkinsci.plugins.identifieddata.api.NameResolver;
+import org.jenkinsci.plugins.identifieddata.api.NamedRefUUID;
+import org.jenkinsci.plugins.identifieddata.api.ReferenceableByName;
+
 import edu.umd.cs.findbugs.annotations.Nullable;
 import hudson.ExtensionList;
 import hudson.Util;
