@@ -53,6 +53,7 @@ public abstract class AGlobalNameResolver<T extends IdentifiedByUUID & Reference
 		final String name0 = Util.fixEmptyAndTrim(name);
 		final Optional<UUID> selected = allResolvers().stream()
 				.map(resolver -> resolver.resolveName(item, name0))
+				.filter(Objects::nonNull)
 				.findFirst()
 				.orElse(resolveNameLocally(item, name0));
 		return selected.isEmpty() ? null : getEntryById(selected.get());
