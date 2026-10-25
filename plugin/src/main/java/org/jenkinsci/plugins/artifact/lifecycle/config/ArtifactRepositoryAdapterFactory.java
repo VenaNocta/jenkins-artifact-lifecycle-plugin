@@ -57,6 +57,7 @@ public interface ArtifactRepositoryAdapterFactory<T extends ArtifactRepository> 
 				});
 	}
 
+	// TODO: consider a cache like jenkins.model.TransientActionFactory#Cache
 	@SuppressWarnings("rawtypes")
 	public static Stream<ArtifactRepositoryAdapterFactory> all(final Class<? extends ArtifactRepository> targetType,
 			final Class<? extends ArtifactRepository> sourceType) {
