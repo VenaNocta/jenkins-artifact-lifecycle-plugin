@@ -31,6 +31,8 @@ import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.lang.StringUtils;
 import org.jenkinsci.plugins.artifact.lifecycle.config.AArtifactRepository;
 import org.jenkinsci.plugins.artifact.lifecycle.config.ArtifactRepositoryDescriptor;
+import org.jenkinsci.plugins.artifact.lifecycle.config.WithDownloadSupport;
+import org.jenkinsci.plugins.artifact.lifecycle.config.WithUploadSupport;
 import org.kohsuke.accmod.Restricted;
 import org.kohsuke.accmod.restrictions.NoExternalUse;
 import org.kohsuke.stapler.AncestorInPath;
@@ -56,7 +58,8 @@ import hudson.util.ListBoxModel;
 import jenkins.model.Jenkins;
 import net.runeduniverse.lib.utils.common.URIBuilder;
 
-public class DefaultMaven2Repository extends AArtifactRepository implements Maven2Repository {
+public class DefaultMaven2Repository extends AArtifactRepository
+		implements Maven2Repository, WithDownloadSupport, WithUploadSupport {
 
 	private static final long serialVersionUID = 1L;
 
@@ -94,6 +97,22 @@ public class DefaultMaven2Repository extends AArtifactRepository implements Mave
 
 	public String getCredentialId() {
 		return this.credentialId;
+	}
+
+	@Override
+	public String getDownloadCredentialId() {
+		return getCredentialId();
+	}
+
+	@Override
+	public String getUploadCredentialId() {
+		return getCredentialId();
+	}
+
+	@Override
+	public boolean hasUploadSupport() {
+		// TODO implement an uploader for this repo!
+		return false;
 	}
 
 	@DataBoundSetter

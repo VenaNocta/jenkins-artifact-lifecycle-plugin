@@ -22,10 +22,10 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import java.util.Set;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import java.util.UUID;
 import org.jenkinsci.Symbol;
 import org.jenkinsci.plugins.artifact.lifecycle.ui.GlobalArtifactLifecycleConfigLink.ArtifactLifecycleCategory;
@@ -85,11 +85,11 @@ public class GlobalRepositoryIndex extends GlobalConfiguration {
 	}
 
 	public Map<UUID, ArtifactRepository> getRepoMap(final Predicate<ArtifactRepository> check,
-			final Set<Class<?>> types) {
+			Class<? extends ArtifactRepository> type) {
 		final Map<UUID, ArtifactRepository> repoMap = new LinkedHashMap<>();
 		this.repoMap.values()
 				.parallelStream()
-				.map(adaptToTypes(types))
+				.map(adaptToType(type))
 				.filter(Objects::nonNull)
 				.filter(check::test)
 				.forEachOrdered(v -> repoMap.put(v.getUuid(), v));
@@ -100,37 +100,48 @@ public class GlobalRepositoryIndex extends GlobalConfiguration {
 		return getRepos(check, null);
 	}
 
-	public List<ArtifactRepository> getRepos(final Predicate<ArtifactRepository> check, final Set<Class<?>> types) {
+	public List<ArtifactRepository> getRepos(final Predicate<ArtifactRepository> check,
+			final Class<? extends ArtifactRepository> type) {
 		final List<ArtifactRepository> repoLst = new LinkedList<>();
 		this.repoMap.values()
 				.parallelStream()
-				.map(adaptToTypes(types))
+				.flatMap(adaptToTypeAsStream(type))
 				.filter(Objects::nonNull)
 				.filter(check::test)
 				.forEachOrdered(repoLst::add);
 		return repoLst;
 	}
 
-	public static Function<ArtifactRepository, ArtifactRepository> adaptToTypes(final Set<Class<?>> types) {
-		if (types == null || types.isEmpty())
+	public static Function<ArtifactRepository, ArtifactRepository> adaptToType(
+			final Class<? extends ArtifactRepository> type) {
+		if (type == null)
 			return Function.identity();
 		return repo -> {
 			// check the repo
-			boolean ok = true;
-			for (Class<?> type : types)
-				ok &= type.isInstance(repo);
-			if (ok)
+			if (type.isInstance(repo))
 				return repo;
-			// get the adapter
-			if ((repo = repo.adapter(types)) == null)
-				return null;
-			// check the adapter
-			ok = true;
-			for (Class<?> type : types)
-				ok &= type.isInstance(repo);
-			if (ok)
-				return repo;
-			return null;
+			// adapt the repo
+			return ArtifactRepositoryAdapterFactory.all(type, repo.getClass())
+					.map(f -> f.adapt(repo))
+					.filter(Objects::nonNull)
+					.findFirst()
+					.orElse(null);
+		};
+	}
+
+	public static Function<ArtifactRepository, Stream<ArtifactRepository>> adaptToTypeAsStream(
+			final Class<? extends ArtifactRepository> type) {
+		if (type == null)
+			return f -> List.of(f)
+					.stream();
+		return repo -> {
+			// check the repo
+			if (type.isInstance(repo))
+				return List.of(repo)
+						.stream();
+			// adapt the repo
+			return ArtifactRepositoryAdapterFactory.all(type, repo.getClass())
+					.map(f -> f.adapt(repo));
 		};
 	}
 
