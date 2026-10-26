@@ -59,7 +59,7 @@ public class GlobalRepositoryIndex extends GlobalConfiguration {
 		super.load();
 		this.repoMap.clear();
 		this.repos.stream()
-				.forEachOrdered(t -> this.repoMap.put(t.getUuid(), t));
+				.forEach(t -> this.repoMap.put(t.getUuid(), t));
 	}
 
 	public ArtifactRepository getRepoById(final UUID uuid) {
@@ -147,7 +147,10 @@ public class GlobalRepositoryIndex extends GlobalConfiguration {
 
 	// used by jelly & JCasC
 	public List<ArtifactRepository> getRepos() {
-		return new ArrayList<>(this.repoMap.values());
+		return this.repoMap.values()
+				.stream()
+				.sorted(ArtifactRepository.COMPARE_BY_NAME_WITH_COMMENTS)
+				.collect(Collectors.toCollection(ArrayList::new));
 	}
 
 	@DataBoundSetter

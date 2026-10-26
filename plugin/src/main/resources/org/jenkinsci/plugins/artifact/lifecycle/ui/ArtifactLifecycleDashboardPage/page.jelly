@@ -3,5 +3,5 @@
 <j:jelly xmlns:j="jelly:core">
 	<h1>${%Dashboard}</h1>
 	<p>Welcome to the Artifact Lifecycle Dashboard</p>
-	<p>Select an item from the left navigation.YYY</p>
+	<p>Select an item from the left navigation.</p>
 </j:jelly>

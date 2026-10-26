@@ -16,11 +16,19 @@
 package org.jenkinsci.plugins.artifact.lifecycle.config;
 
 import java.io.Serializable;
+import java.util.Comparator;
+
 import org.jenkinsci.plugins.identifieddata.api.IdentifiedByUUID;
+import org.jenkinsci.plugins.identifieddata.api.IdentifierUtils;
 
 import hudson.model.Describable;
 
 public interface ArtifactRepository extends Describable<ArtifactRepository>, IdentifiedByUUID, Serializable {
+
+	public static final Comparator<ArtifactRepository> COMPARE_BY_NAME = //
+			new IdentifierUtils.NameComparator<ArtifactRepository>(ArtifactRepository::getName);
+	public static final Comparator<ArtifactRepository> COMPARE_BY_NAME_WITH_COMMENTS = //
+			new IdentifierUtils.NameComparatorWithComments<ArtifactRepository>(ArtifactRepository::getName);
 
 	public String getName();
 

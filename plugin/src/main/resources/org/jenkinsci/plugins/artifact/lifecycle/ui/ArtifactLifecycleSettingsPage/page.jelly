@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?jelly escape-by-default='true'?>
 <j:jelly xmlns:j="jelly:core">
-	<h1>${%Settings}</h1>
+	<h1>${it.displayName}</h1>
 	<p>Artifact Lifecycle Settings page!</p>
+	<p>Since this page is still WIP, go ahead and select another page from navigation on the left.</p>
 </j:jelly>

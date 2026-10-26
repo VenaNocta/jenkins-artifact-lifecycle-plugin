@@ -27,6 +27,7 @@ import java.util.function.Predicate;
 import java.util.stream.Stream;
 
 import org.jenkinsci.plugins.identifieddata.api.IdentifiedByUUID;
+import org.jenkinsci.plugins.identifieddata.api.IdentifierUtils;
 import org.jenkinsci.plugins.identifieddata.api.NameResolver;
 import org.jenkinsci.plugins.identifieddata.api.NamedRefUUID;
 import org.jenkinsci.plugins.identifieddata.api.ReferenceableByName;
@@ -91,7 +92,7 @@ public abstract class AGlobalNameResolver<T extends IdentifiedByUUID & Reference
 					final String name0 = entry.getName();
 					if (name0 == null || name0.length() == 0)
 						return false;
-					return !NamedRefUUID.isComment(name0) && name.equals(name0);
+					return !IdentifierUtils.isComment(name0) && name.equals(name0);
 				})
 				.map(IdentifiedByUUID::getUuid)
 				.findFirst();
